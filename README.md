@@ -27,7 +27,7 @@ main
 	%
 ```
 
-As in Forth, routines in INTP are called “words”. This code defines two words, `double` and `main`. When the program is run, `main` runs. It pushes the string “Hello” onto the stack, calls `double` twice, and then prints the string on top of the stack to standard output. Each time `double` is called, it duplicates the thing on top of the stack, then concatenates the two strings at the top of the stack, concatenates them and pushes the result back onto the stack. In the end, this example prints “Hello” four times.
+As in Forth, routines in INTP are called “words”. This code defines two words, `double` and `main`. When the program is run, `main` runs. It pushes the string “Hello” onto the stack, calls `double` twice, and then prints the string on top of the stack to standard output. Each time `double` is called, it duplicates the thing on top of the stack, then pops the two strings at the top of the stack, concatenates them and pushes the result back onto the stack. In the end, this example prints “Hello” four times.
 
 INTP has no explicit variables and everything operates directly on the stack. Pretty cool, huh? There's a wiki out there with a great [overview of how concatenative languages work](http://concatenative.org/wiki/view/Concatenative%20language).
 
