@@ -1,7 +1,9 @@
 ; INTP standard library
 ;
 ; Two-argument numerical operators:
-;  + - * / MOD && || ^ & | < > <= >= != == ! ~ NEG
+;  + - * / MOD && || ^ & | < > <= >= != ==
+; One-argument numerical operators:
+;  ! ~ NEG
 ; Builtin stack manipulation commands:
 ;  DROP SWAP DUP SWSTK SHOVE
 ; Builtin string commands:
