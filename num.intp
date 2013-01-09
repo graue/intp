@@ -1,0 +1,43 @@
+main
+	INPUT
+	DUP isnum
+	"squareprint" "doubleprint" IFTE
+	%
+squareprint
+	ATOI square disp
+	%
+doubleprint
+	double PRINT
+	%
+square
+	DUP *
+	%
+double
+	DUP CONCAT
+	%
+isnum
+	DUP isposnum SHOVE
+	isnegnum
+	SWSTK SHOVE SWSTK
+	||
+	%
+isposnum
+	1 CHRAT isdigit
+	%
+isnegnum
+	DUP
+	1 CHRAT 45 == SHOVE
+	2 CHRAT isdigit
+	SWSTK SHOVE SWSTK
+	&&
+	%
+isdigit
+	DUP
+	48 >= SHOVE
+	57 <=
+	SWSTK SHOVE SWSTK
+	&&
+	%
+disp
+	ITOA PRINT
+	%

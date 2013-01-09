@@ -1,0 +1,71 @@
+; INTP toplevel in INTP.
+; Enter one word-to-call, number, or string on a line.
+; Escape characters in strings are ignored; the leading and trailing
+; quote marks of strings are just removed. Empty line quits.
+main	; ( -- )
+	"lib.intp" INCL
+	"substr.intp" incl
+	intp
+	%
+intp	; ( -- )
+	input eval
+	"intp" "id" ifte
+	%
+true	; ( -- true )
+	1 %
+false	; ( -- false )
+	0 %
+eval	; ( str -- bool )
+	dup len 0 > "eval2" "false" ifte ; if zero-length, stop
+	%
+eval2	; ( str -- bool )
+	dup isnum "evalnum" "eval3" ifte
+	%
+eval3	; ( str -- bool )
+	dup isstr "evalstr" "evalcmd" ifte
+	%
+evalcmd ; ( str -- bool )
+	call true
+	%
+evalnum ; ( str -- num bool )
+	atoi true
+	%
+isnum	; ( str -- bool )
+	dup isposnum shove
+	isnegnum
+	unshove
+	||
+	%
+isposnum ; ( str -- bool )
+	1 chrat isdigit
+	%
+isnegnum ; ( str -- bool )
+	dup
+	1 chrat 45 = shove
+	is2digit
+	unshove &&
+	%
+isdigit	; ( char -- bool )
+	dup
+	48 >= shove
+	57 <=
+	unshove &&
+	%
+is2digit ; ( str -- bool )
+	dup len 2 >=
+	"is2digit2" "dropfalse" ifte
+	%
+is2digit2 ; ( str -- bool )
+	2 chrat isdigit
+	%
+dropfalse ; ( a -- bool )
+	drop false
+	%
+isstr	; ( str -- bool )
+	1 chrat 34 =
+	%
+evalstr	; ( str -- str bool )
+	dup len 1 -		; str len-1
+	shove 2 unshove		; str 2 len-1
+	substr true
+	%

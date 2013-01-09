@@ -1,0 +1,68 @@
+; INTP standard library
+;
+; Two-argument numerical operators:
+;  + - * / MOD && || ^ & | < > <= >= != == ! ~ NEG
+; Builtin stack manipulation commands:
+;  DROP SWAP DUP SWSTK SHOVE
+; Builtin string commands:
+;  CONCAT CHRAT ATOI ITOA STR LEN INPUT PRINT
+; Builtin misc. commands:
+;  IFTE INCL
+
+; Synonyms for niceness
+=	==			% ; Arithmetic
+mod	MOD			%
+neg	NEG			%
+drop	DROP			% ; Stacks
+swap	SWAP			%
+dup	DUP			%
+swstk	SWSTK   		%
+shove	SHOVE			%
+concat	CONCAT			% ; Strings
+chrat	CHRAT			%
+str	STR			%
+len	LEN			%
+itoa	ITOA			% ; Conversions
+atoi	ATOI			%
+input	INPUT			% ; I/O
+print	PRINT			%
+incl	INCL			% ; Misc.
+ifte	IFTE			%
+
+; Shadow commands for return stack
+rdrop	swstk drop swstk	%
+rswap	swstk swap swstk	%
+rdup	swstk dup swstk		%
+r+	swstk + swstk		%
+r-	swstk - swstk		%
+r*	swstk * swstk		%
+r/	swstk / swstk		%
+rmod	swstk mod swstk		%
+rneg	swstk neg swstk		%
+
+; Novelties
+id				% ; do nothing
+unshove	swstk shove swstk	% ; undo a shove
+disp	itoa print		% ; display a number
+getnum	input atoi		% ; get a number
+call	1 swap "id" ifte	% ; call a word
+swoncat	swap concat		% ; concatenate backwards
+
+; Math
+divides	mod 0 =			% ; 39 13 divides => 1
+				  ;  7  3 divides => 0
+
+; Stack conveniences
+dup2				  ; ( a b -- a b a b )
+	shove dup unshove dup	  ; a a b b
+	shove swap unshove	  ; a b a b
+	%
+
+dup3				  ; ( a b c -- a b c a b c )
+	shove shove dup unshove dup unshove dup
+				  ; a a b b c c
+	shove shove shove swap unshove unshove swap
+				  ; a b a c b <-> c
+	shove swap unshove unshove
+				  ; a b c a b c
+	%

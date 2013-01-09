@@ -1,0 +1,6 @@
+double
+	DUP CONCAT
+	%
+main
+	"Hello" double double PRINT
+	%

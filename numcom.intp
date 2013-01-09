@@ -1,0 +1,47 @@
+; This program has COMMENTS
+; Comments: Truly a wonderful
+          ; invention, eh?
+main ; This is the main word
+	INPUT ; read stuff from keyboard "hey unbalanced quote yo!
+	DUP isnum ; % does nothing in a comment
+	"squareprint" "doubleprint" IFTE ; yo
+	% ; even here!
+squareprint
+	ATOI square disp
+	%
+doubleprint
+	double PRINT
+	%
+square ; good stuff, man
+	DUP *
+	%
+double
+	DUP CONCAT
+	%
+isnum
+	DUP isposnum SHOVE
+	isnegnum
+	SWSTK SHOVE SWSTK
+	||
+	%
+isposnum ; is this a positive number?
+	1 CHRAT isdigit
+	%
+isnegnum ; Graue FIXME: doesn't work for one-character strings
+	DUP
+	1 CHRAT 45 == SHOVE
+	2 CHRAT isdigit
+	SWSTK SHOVE SWSTK
+	&&
+	%
+isdigit
+	DUP
+	48 >= SHOVE
+	57 <=
+	SWSTK SHOVE SWSTK
+	&&
+	%
+disp
+	ITOA PRINT
+	%
+; And a nice comment at the end of the file even

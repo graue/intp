@@ -1,0 +1,5 @@
+main
+	"x:" PRINT INPUT ATOI
+	"y:" PRINT INPUT ATOI
+	+ ITOA "x+y=" SWAP CONCAT PRINT
+	%

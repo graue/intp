@@ -1,0 +1,64 @@
+; substr.intp example:
+; Type a string, then start- and end-character indices.
+; The selected substring will be displayed.
+
+; This can also be used as a library from another source file.
+; The "main" word here will be ignored because one will already have
+; been defined in that file.
+
+main	; ( -- )
+	"lib.intp" INCL
+	"Enter a string: " print input
+	"Characters are 1-based.\nStart: " print input atoi
+	"End: " print input atoi
+	substr "\n" concat print
+	%
+
+substr	; ( str f l -- substr )
+	dup2			; str f l f l
+	shove shove shove swap	; f str <-> l f l
+	unshove swap		; f l str <-> f l
+	unshove unshove		; f l str f l
+	shovestr		; f l <-> chars
+	1 + swap -		; numchars <-> chars
+	unshovechars		; substr
+	%
+
+unshovechars ; ( numchars -- str )
+	"" swap			; "" numchars <-> numchars
+	unshoncat		; str
+	%
+
+unshoncat ; ( strsofar numchars -- str )
+	dup 0 >			; any left to work on?
+		"dounshoncat"	; if so, work on them
+		"drop"		; otherwise just delete the 0
+	ifte %
+
+dounshoncat ; ( strsofar numchars -- str )
+	swap			; numchars strsofar <-> chars
+	unshove	str		; numchars strsofar unitstr <-> chars
+	concat			; numchars strsofar <-> chars
+	swap			; strsofar numchars <-> chars
+	1 - unshoncat		; recur!
+	%
+
+shovestr ; ( str f l -- <some characters on return stack> )
+	; shove the characters from l (last) to f (first) onto return stack
+	dup2			; str f l f l
+	>			; f > l?
+		"drop3"		; then stop
+		"doshove"	; otherwise keep going
+	ifte %
+
+doshove ; ( str f l -- <some characters on return stack> )
+	shove shove dup		; str str <-> f l
+	unshove swap unshove	; str f str l <->
+	dup shove swap unshove	; str f l str l <->
+	chrat shove		; str f l <-> c
+	1 -			; str f l-1 <-> c
+	shovestr		; recursion, hooray!
+	%
+
+drop3	; ( a b c -- )
+	drop drop drop %

@@ -1,0 +1,13 @@
+; Demonstrates tail recursion.
+; This won't overflow the stack as you might expect.
+main
+	1 eternity
+	%
+disp
+	ITOA PRINT
+	%
+eternity
+	DUP disp "," PRINT
+	1 +
+	eternity
+	%

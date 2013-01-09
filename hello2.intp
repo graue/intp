@@ -1,0 +1,7 @@
+main
+	"What is your name? " PRINT
+	"Hello, "
+	INPUT
+	"! It is nice to meet you!\n"
+	CONCAT CONCAT PRINT
+	%
