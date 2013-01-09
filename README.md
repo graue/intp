@@ -36,22 +36,3 @@ You can include another source file as a library by pushing its filename on the 
 There might be a big honking bug in the interpreter because when I run recursion.intp it's behaving really weird. (I've barely touched this code at all since I wrote it.)
 
 As a language INTP is kind of cool but not original, because everything cool about it came from Joy. It's basically a second-rate Joy clone.
-
-
-
-## Copying
-
-INTP: tiny interpreter for concatenative programming language
-
-Written by Scott Feeney <scott@oceanbase.org>, 2006, 2013
-
-This software and associated documentation files (the "Software") is
-released under the CC0 Public Domain Dedication, version 1.0, as
-published by Creative Commons. To the extent possible under law, the
-author(s) have dedicated all copyright and related and neighboring
-rights to the Software to the public domain worldwide. The Software is
-distributed WITHOUT ANY WARRANTY.
-
-If you did not receive a copy of the CC0 Public Domain Dedication
-along with the Software, see
-[http://creativecommons.org/publicdomain/zero/1.0/]
