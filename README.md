@@ -33,6 +33,4 @@ INTP has no explicit variables and everything operates directly on the stack. Pr
 
 You can include another source file as a library by pushing its filename on the stack and calling the `INCL` word, e.g. `"lib.intp" INCL`. See substr.intp for an example using this.
 
-There might be a big honking bug in the interpreter because when I run recursion.intp it's behaving really weird. (I've barely touched this code at all since I wrote it.)
-
 As a language INTP is kind of cool but not original, because everything cool about it came from Joy. It's basically a second-rate Joy clone.
